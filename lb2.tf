@@ -40,8 +40,8 @@ resource "aws_security_group" "LCSG" {
 
   # HTTP access from anywhere
   ingress {
-    from_port   = 8000
-    to_port     = 8000
+    from_port   = 80
+    to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -76,8 +76,8 @@ resource "aws_security_group" "LBSG" {
   }
   
   ingress {
-    from_port = 8000
-    to_port = 8000
+    from_port = 80
+    to_port = 80
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -93,7 +93,7 @@ resource "aws_lb" "alb" {
     Name    = "alb"    
   }  
   provisioner "local-exec" {
-    command = "echo ${aws_lb.alb.dns_name} >> /var/lib/jenkins/workspace/Django_2/alb"
+    command = "echo ${aws_lb.alb.dns_name} >> /var/lib/jenkins/workspace/Wordpress2/alb"
 }
 }
 
@@ -116,19 +116,19 @@ resource "aws_lb_target_group" "alb_target_group" {
     timeout             = 5    
     interval            = 10    
     path                = "/"    
-    port                = 8000
+    port                = 80
   }
 }
 
 resource "aws_lb_target_group_attachment" "tga" {
   target_group_arn = aws_lb_target_group.alb_target_group.arn
   target_id        = aws_instance.Appserver1.id
-  port             = 8000
+  port             = 80
 }
 resource "aws_lb_target_group_attachment" "tga2" {
   target_group_arn = aws_lb_target_group.alb_target_group.arn
   target_id        = aws_instance.Appserver2.id
-  port             = 8000
+  port             = 80
 }
 
 resource "aws_autoscaling_attachment" "alb_autoscale" {
@@ -138,7 +138,7 @@ resource "aws_autoscaling_attachment" "alb_autoscale" {
 
 resource "aws_lb_listener" "alb_listener" {  
   load_balancer_arn = aws_lb.alb.arn  
-  port              = 8000 
+  port              = 80
   protocol          = "HTTP"
   
   default_action {    
