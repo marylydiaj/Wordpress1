@@ -44,7 +44,7 @@ tags =  {
        Name = "Appserver1"
      }
 provisioner "local-exec" {
-    command = "echo ${aws_instance.Appserver1.public_ip} >> /var/lib/jenkins/workspace/Django_2/publicip1"
+    command = "echo ${aws_instance.Appserver1.public_ip} >> /var/lib/jenkins/workspace/Wordpress2/publicip1"
 }
 }
 data "template_file" "Appserver1" {
@@ -71,7 +71,7 @@ tags =  {
        Name = "Appserver2"
      }
 provisioner "local-exec" {
-    command = "echo ${aws_instance.Appserver2.public_ip} >> /var/lib/jenkins/workspace/Django_2/publicip2"
+    command = "echo ${aws_instance.Appserver2.public_ip} >> /var/lib/jenkins/workspace/Wordpress2/publicip2"
 }
 }
 data "template_file" "Appserver2" {
@@ -144,8 +144,8 @@ egress {
 ingress {
       protocol = "tcp"
       self  = true
-      from_port = 8000
-      to_port = 8000
+      from_port = 80
+      to_port = 80
       cidr_blocks = ["0.0.0.0/0"]
         }
 
@@ -187,7 +187,7 @@ db_subnet_group_name = aws_db_subnet_group.DBSubnetgroup.id
 vpc_security_group_ids = [aws_security_group.DBSG.id]
 
   provisioner "local-exec" {
-    command = "echo ${aws_db_instance.RDS.address} >> /var/lib/jenkins/workspace/drupal/endpoint"
+    command = "echo ${aws_db_instance.RDS.address} >> /var/lib/jenkins/workspace/Wordpress2/endpoint"
 }
 }
 
