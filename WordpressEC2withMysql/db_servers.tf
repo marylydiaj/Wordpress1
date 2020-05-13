@@ -78,17 +78,13 @@ resource "aws_instance" "db1" {
     subnet_id = aws_subnet.us-east-1b-private.id
     private_ip = var.privateec2_ip
     source_dest_check = false
-    root_block_device {
-       volume_type           = "gp2"
-       volume_size           = var.size
-       delete_on_termination = "true"
-    }
+
     tags = {
         Name = "DB Server"
         Terraform = true
     }
     provisioner "local-exec" {
-         command = "echo ${aws_instance.db1.private_ip} >> /var/lib/jenkins/workspace/DjangoMultiChoice/Multiprivateip"
+         command = "echo ${aws_instance.db1.private_ip} >> /var/lib/jenkins/workspace/Wordpress1/Multiprivateip"
     }
 }
 data "template_file" "db1" {
