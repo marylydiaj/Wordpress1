@@ -33,10 +33,10 @@ root_block_device {
        delete_on_termination = "true"
 }
 tags =  {
-       Name = "DjangoInstance"
+       Name = "WordpressoInstance"
      }
 provisioner "local-exec" {
-    command = "echo ${aws_instance.FirsttfInstance.public_ip} >> /var/lib/jenkins/workspace/DjangoMultiChoice/publicip"
+    command = "echo ${aws_instance.FirsttfInstance.public_ip} >> /var/lib/jenkins/workspace/WordpressMultiChoice/publicip"
 }
 }
 data "template_file" "FirsttfInstance" {
