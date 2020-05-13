@@ -16,7 +16,7 @@ db_subnet_group_name = aws_db_subnet_group.tfdbsubnetgroup.id
 vpc_security_group_ids = [aws_security_group.dbsg.id]
 
   provisioner "local-exec" {
-    command = "echo ${aws_db_instance.tfrds.address} >> /var/lib/jenkins/workspace/DjangoMultiChoice/endpoint"
+    command = "echo ${aws_db_instance.tfrds.address} >> /var/lib/jenkins/workspace/WordpressMultiChoice/endpoint"
 }
 }
 
