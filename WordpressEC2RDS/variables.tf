@@ -20,7 +20,7 @@ variable "instance_type" {
 }
 variable "key" {
     description = "instance key name"
-    default     = "godsnv"
+    default     = "ammu"
 }
 variable "size" {
     description = "instance size"
