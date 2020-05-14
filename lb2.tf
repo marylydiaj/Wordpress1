@@ -90,7 +90,7 @@ resource "aws_lb" "alb" {
   internal        = false 
   idle_timeout    = 60   
   tags = {    
-    Name    = "alb"    
+    Name    = "alb1"    
   }  
   provisioner "local-exec" {
     command = "echo ${aws_lb.alb.dns_name} >> /var/lib/jenkins/workspace/Wordpress3/publicip"
@@ -98,7 +98,7 @@ resource "aws_lb" "alb" {
 }
 
 resource "aws_lb_target_group" "alb_target_group" {  
-  name     = "alb-target-group"  
+  name     = "alb-target-group1"  
   port     = "80"  
   protocol = "HTTP"  
   vpc_id   = aws_vpc.MyVPC.id
@@ -147,7 +147,7 @@ resource "aws_lb_listener" "alb_listener" {
   }
 }
 resource "aws_iam_role" "test_role" {
-  name = "test_role"
+  name = "test_role1"
 
   assume_role_policy = <<EOF
 {
