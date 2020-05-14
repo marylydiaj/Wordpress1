@@ -52,6 +52,6 @@ cd /var/www/html
 wp theme install Consulting --allow-root
 wp theme activate consulting --allow-root
 wp import zippyopssite.wordpress.2020-04-22.000.xml --authors=create --allow-root
-mysql -u zippyops -pzippyops -h $endpoint --database zippyops < wordpressdb.sql
+mysql -u zippyops -pzippyops -h $endpoint --database zippyops < /root/zippyops_wordpress/wordpressdb.sql
 systemctl restart httpd
 
