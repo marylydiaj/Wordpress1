@@ -44,7 +44,7 @@ tags =  {
        Name = "Appserver1"
      }
 provisioner "local-exec" {
-    command = "echo ${aws_instance.Appserver1.public_ip} >> /var/lib/jenkins/workspace/Wordpress3/publicip"
+    command = "echo ${aws_instance.Appserver1.public_ip} >> /var/lib/jenkins/workspace/Wordpress3/publicip1"
 }
 }
 data "template_file" "Appserver1" {
@@ -71,7 +71,7 @@ tags =  {
        Name = "Appserver2"
      }
 provisioner "local-exec" {
-    command = "echo ${aws_instance.Appserver2.public_ip} >> /var/lib/jenkins/workspace/Wordpress3/publicip"
+    command = "echo ${aws_instance.Appserver2.public_ip} >> /var/lib/jenkins/workspace/Wordpress3/publicip2"
 }
 }
 data "template_file" "Appserver2" {
