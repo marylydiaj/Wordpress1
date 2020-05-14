@@ -21,7 +21,7 @@ sudo echo "CREATE DATABASE zippyopsdb CHARACTER SET utf8 COLLATE utf8_general_ci
 sudo echo "CREATE USER 'zippyops'@'localhost' IDENTIFIED BY 'zippyops';" | mysql
 sudo echo "GRANT ALL PRIVILEGES ON zippyopsdb.* TO 'zippyops'@'localhost';" | mysql
 sudo echo "FLUSH PRIVILEGES;" | mysql
-cd
+cd /root
 git clone https://github.com/Ragu3492/wp-config.git
 cd /var/www/html
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
@@ -38,7 +38,7 @@ sudo chown -R apache /var/www/html
 #wp theme install Consulting --allow-root
 #wp theme activate consulting --allow-root
 wp plugin install wordpress-importer --activate --allow-root
-cd
+cd /root
 endpoint=`aws rds --region us-east-1 describe-db-instances --query "DBInstances[*].Endpoint.Address"`
 echo >file $endpoint
 sed -i 's/[][]//g' /root/file
