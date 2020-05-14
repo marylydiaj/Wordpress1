@@ -84,13 +84,13 @@ resource "aws_security_group" "LBSG" {
 }
 
 resource "aws_lb" "alb" {  
-  name            = "alb"  
+  name            = "alb1"  
   subnets         = [ aws_subnet.Publicsubnet1.id, aws_subnet.Publicsubnet2.id ]
   security_groups = [ aws_security_group.LBSG.id ]
   internal        = false 
   idle_timeout    = 60   
   tags = {    
-    Name    = "alb1"    
+    Name    = "alb"    
   }  
   provisioner "local-exec" {
     command = "echo ${aws_lb.alb.dns_name} >> /var/lib/jenkins/workspace/Wordpress3/publicip"
