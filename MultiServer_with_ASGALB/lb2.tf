@@ -83,7 +83,7 @@ resource "aws_security_group" "LBSG" {
   }
 }
 
-resource "aws_lb" "alb" {  
+resource "aws_lb" "alb1" {  
   name            = "alb"  
   subnets         = [ aws_subnet.Publicsubnet1.id, aws_subnet.Publicsubnet2.id ]
   security_groups = [ aws_security_group.LBSG.id ]
@@ -146,7 +146,7 @@ resource "aws_lb_listener" "alb_listener" {
     type             = "forward"  
   }
 }
-resource "aws_iam_role" "test_role" {
+resource "aws_iam_role" "test_role1" {
   name = "test_role"
 
   assume_role_policy = <<EOF
@@ -169,11 +169,11 @@ EOF
       tag-key = "dbrole"
   }
 }
-resource "aws_iam_instance_profile" "test_profile" {
+resource "aws_iam_instance_profile" "test_profile1" {
   name = "test_profile"
   role = aws_iam_role.test_role.name
 }
-resource "aws_iam_role_policy" "test_policy" {
+resource "aws_iam_role_policy" "test_policy1" {
   name = "test_policy"
   role = aws_iam_role.test_role.id
 
