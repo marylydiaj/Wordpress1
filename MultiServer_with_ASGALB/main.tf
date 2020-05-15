@@ -44,7 +44,7 @@ tags =  {
        Name = "Appserver1"
      }
 provisioner "local-exec" {
-    command = "echo ${aws_instance.Appserver1.public_ip} >> /var/lib/jenkins/workspace/WordPressMultipleChoice/publicip1"
+    command = "echo ${aws_instance.Appserver1.public_ip} >> /var/lib/jenkins/workspace/Wordpress3/publicip1"
 }
 }
 data "template_file" "Appserver1" {
@@ -71,7 +71,7 @@ tags =  {
        Name = "Appserver2"
      }
 provisioner "local-exec" {
-    command = "echo ${aws_instance.Appserver2.public_ip} >> /var/lib/jenkins/workspace/WordPressMultipleChoice/publicip2"
+    command = "echo ${aws_instance.Appserver2.public_ip} >> /var/lib/jenkins/workspace/Wordpress3/publicip2"
 }
 }
 data "template_file" "Appserver2" {
@@ -169,7 +169,7 @@ tags = {
 
 }
 
-resource "aws_db_instance" "RDS1" {
+resource "aws_db_instance" "RDS" {
 allocated_storage = "10"
 storage_type = "gp2"
 engine = "mysql"
@@ -187,7 +187,7 @@ db_subnet_group_name = aws_db_subnet_group.DBSubnetgroup.id
 vpc_security_group_ids = [aws_security_group.DBSG.id]
 
   provisioner "local-exec" {
-    command = "echo ${aws_db_instance.RDS.address} >> /var/lib/jenkins/workspace/WordPressMultipleChoice/endpoint"
+    command = "echo ${aws_db_instance.RDS.address} >> /var/lib/jenkins/workspace/Wordpress3/endpoint"
 }
 }
 
@@ -248,7 +248,7 @@ tags = {
 }
 
 resource "aws_db_subnet_group" "DBSubnetgroup" {
-name = "rdssg2"
+name = "rdssg3"
 subnet_ids = [aws_subnet.Publicsubnet1.id, aws_subnet.Publicsubnet2.id, aws_subnet.Privatesubnet1.id,aws_subnet.Privatesubnet2.id] 
 
 tags = {
