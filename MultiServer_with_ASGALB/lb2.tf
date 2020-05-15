@@ -83,8 +83,8 @@ resource "aws_security_group" "LBSG" {
   }
 }
 
-resource "aws_lb" "alb1" {  
-  name            = "alb"  
+resource "aws_lb" "alb" {  
+  name            = "alb1"  
   subnets         = [ aws_subnet.Publicsubnet1.id, aws_subnet.Publicsubnet2.id ]
   security_groups = [ aws_security_group.LBSG.id ]
   internal        = false 
@@ -93,12 +93,12 @@ resource "aws_lb" "alb1" {
     Name    = "alb"    
   }  
   provisioner "local-exec" {
-    command = "echo ${aws_lb.alb.dns_name} >> /var/lib/jenkins/workspace/WordPressMultipleChoice/alb"
+    command = "echo ${aws_lb.alb.dns_name} >> /var/lib/jenkins/workspace/Wordpress3/publicip"
 }
 }
 
 resource "aws_lb_target_group" "alb_target_group" {  
-  name     = "alb-target-group"  
+  name     = "alb-target-group1"  
   port     = "80"  
   protocol = "HTTP"  
   vpc_id   = aws_vpc.MyVPC.id
@@ -146,8 +146,8 @@ resource "aws_lb_listener" "alb_listener" {
     type             = "forward"  
   }
 }
-resource "aws_iam_role" "test_role1" {
-  name = "test_role"
+resource "aws_iam_role" "test_role" {
+  name = "test_role1"
 
   assume_role_policy = <<EOF
 {
@@ -169,12 +169,12 @@ EOF
       tag-key = "dbrole"
   }
 }
-resource "aws_iam_instance_profile" "test_profile1" {
-  name = "test_profile"
+resource "aws_iam_instance_profile" "test_profile" {
+  name = "test_profile1"
   role = aws_iam_role.test_role.name
 }
-resource "aws_iam_role_policy" "test_policy1" {
-  name = "test_policy"
+resource "aws_iam_role_policy" "test_policy" {
+  name = "test_policy1"
   role = aws_iam_role.test_role.id
 
   policy = <<EOF
@@ -192,4 +192,3 @@ resource "aws_iam_role_policy" "test_policy1" {
 }
 EOF
 }
-
