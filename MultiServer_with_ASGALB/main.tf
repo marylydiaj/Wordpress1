@@ -169,7 +169,7 @@ tags = {
 
 }
 
-resource "aws_db_instance" "RDS" {
+resource "aws_db_instance" "RDS1" {
 allocated_storage = "10"
 storage_type = "gp2"
 engine = "mysql"
