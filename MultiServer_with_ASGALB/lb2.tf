@@ -93,7 +93,7 @@ resource "aws_lb" "alb" {
     Name    = "alb"    
   }  
   provisioner "local-exec" {
-    command = "echo ${aws_lb.alb.dns_name} >> /var/lib/jenkins/workspace/Wordpress2/alb"
+    command = "echo ${aws_lb.alb.dns_name} >> /var/lib/jenkins/workspace/WordPressMultipleChoice/alb"
 }
 }
 
