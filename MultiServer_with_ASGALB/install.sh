@@ -1,5 +1,4 @@
 #!/bin/bash
-#usermod -a -G root ec2-user
 if [ "$(whoami)" != "root" ]
 then
     sudo su -s "$0"
@@ -22,25 +21,24 @@ sudo echo "CREATE DATABASE zippyopsdb CHARACTER SET utf8 COLLATE utf8_general_ci
 sudo echo "CREATE USER 'zippyops'@'localhost' IDENTIFIED BY 'zippyops';" | mysql
 sudo echo "GRANT ALL PRIVILEGES ON zippyopsdb.* TO 'zippyops'@'localhost';" | mysql
 sudo echo "FLUSH PRIVILEGES;" | mysql
-cd
+cd /root
 git clone https://github.com/Ragu3492/wp-config.git
 cd /var/www/html
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 php wp-cli.phar --info
 chmod +x wp-cli.phar
-mv wp-cli.phar /usr/local/bin/wp
+mv wp-cli.phar /usr/bin/wp
 wp --info
-cd /var/www/html
 wp core download --allow-root
 #wp config create --dbname=zippyopsdb --dbuser=zippyops --dbpass=zippyops --locale=ro_RO --allow-root
 cp /root/wp-config/wp-config.php /var/www/html/
 ip=$(dig +short myip.opendns.com @resolver1.opendns.com)
-wp core install --url=$ip --title=zippyops --admin_user=zippyops --admin_password=zippyops --admin_email=admin@zippyops.com(opens in new tab)(opens in new tab) --allow-root
+wp core install --url=$ip --title=zippyops --admin_user=zippyops --admin_password=zippyops --admin_email=admin@zippyops.com --allow-root
 sudo chown -R apache /var/www/html
 #wp theme install Consulting --allow-root
 #wp theme activate consulting --allow-root
 wp plugin install wordpress-importer --activate --allow-root
-cd
+cd /root
 endpoint=`aws rds --region us-east-1 describe-db-instances --query "DBInstances[*].Endpoint.Address"`
 echo >file $endpoint
 sed -i 's/[][]//g' /root/file
@@ -54,6 +52,5 @@ cd /var/www/html
 wp theme install Consulting --allow-root
 wp theme activate consulting --allow-root
 wp import zippyopssite.wordpress.2020-04-22.000.xml --authors=create --allow-root
-mysql -u zippyops -pzippyops -h $endpoint --database zippyops < wordpressdb.sql
+mysql -u zippyops -pzippyops -h $endpoint --database zippyops < /root/zippyops_wordpress/wordpressdb.sql
 systemctl restart httpd
-
